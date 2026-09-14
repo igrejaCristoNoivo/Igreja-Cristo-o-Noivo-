@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Igreja Cristo é o Noivo</title>
 
+
     <style>
+
+        /* =====================================
+           CONFIGURAÇÕES GERAIS
+        ===================================== */
+
         * {
             margin: 0;
             padding: 0;
@@ -20,25 +32,30 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
             background: #080808;
-            color: #fff;
+            color: #ffffff;
         }
 
-        /* =========================
+
+        /* =====================================
            LOGO FLUTUANTE
-           ESCONDIDA AO ENTRAR
-        ========================== */
+        ===================================== */
 
         .logo-flutuante {
+
             position: fixed;
+
             top: 20px;
             right: 20px;
 
             width: 82px;
             height: 82px;
+
             padding: 8px;
 
-            background: rgba(15, 15, 15, 0.92);
+            background: rgba(15, 15, 15, 0.94);
+
             border: 1px solid rgba(255, 255, 255, 0.18);
+
             border-radius: 50%;
 
             display: flex;
@@ -48,15 +65,17 @@
             z-index: 9999;
 
             box-shadow:
-                0 8px 30px rgba(0, 0, 0, 0.6),
+                0 8px 30px rgba(0, 0, 0, 0.65),
                 0 0 25px rgba(255, 255, 255, 0.08);
 
             backdrop-filter: blur(10px);
 
-            /* Começa escondida */
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-20px) scale(0.8);
+
+            transform:
+                translateY(-20px)
+                scale(0.8);
 
             transition:
                 opacity 0.45s ease,
@@ -64,52 +83,69 @@
                 visibility 0.45s ease;
         }
 
-        /* Quando aparecer */
 
         .logo-flutuante.visivel {
+
             opacity: 1;
+
             visibility: visible;
-            transform: translateY(0) scale(1);
+
+            transform:
+                translateY(0)
+                scale(1);
         }
 
+
         .logo-flutuante:hover {
+
             transform: scale(1.08);
         }
 
+
         .logo-flutuante img {
+
             width: 100%;
             height: 100%;
+
             object-fit: contain;
+
             border-radius: 50%;
         }
 
 
-        /* =========================
-           CABEÇALHO
-        ========================== */
+        /* =====================================
+           PRIMEIRA TELA
+        ===================================== */
 
         header {
+
             min-height: 100vh;
 
             display: flex;
+
             flex-direction: column;
+
             justify-content: center;
+
             align-items: center;
 
             text-align: center;
 
-            padding: 30px 20px;
+            padding: 40px 20px;
 
             background:
                 linear-gradient(
                     rgba(0, 0, 0, 0.78),
-                    rgba(0, 0, 0, 0.92)
+                    rgba(0, 0, 0, 0.94)
                 ),
                 #111;
         }
 
+
         .logo {
+
             width: min(85%, 380px);
+
             max-height: 320px;
 
             object-fit: contain;
@@ -117,25 +153,36 @@
             margin-bottom: 30px;
         }
 
+
         header h1 {
-            font-size: clamp(30px, 7vw, 58px);
+
+            font-size:
+                clamp(30px, 7vw, 58px);
+
             letter-spacing: 2px;
+
             margin-bottom: 12px;
         }
 
+
         header p {
-            color: #ccc;
+
+            color: #cccccc;
+
             font-size: 17px;
+
             max-width: 600px;
+
             line-height: 1.6;
         }
 
 
-        /* =========================
-           BOTÃO
-        ========================== */
+        /* =====================================
+           BOTÃO PRINCIPAL
+        ===================================== */
 
         .btn {
+
             display: inline-block;
 
             margin-top: 30px;
@@ -144,8 +191,9 @@
 
             border-radius: 50px;
 
-            background: #fff;
-            color: #000;
+            background: #ffffff;
+
+            color: #000000;
 
             text-decoration: none;
 
@@ -154,111 +202,163 @@
             transition: 0.3s;
         }
 
+
         .btn:hover {
+
             transform: scale(1.05);
         }
 
 
-        /* =========================
+        /* =====================================
            SEÇÕES
-        ========================== */
+        ===================================== */
 
         section {
-            padding: 70px 20px;
+
+            padding: 75px 20px;
+
             max-width: 1200px;
+
             margin: auto;
         }
 
+
         .titulo {
+
             text-align: center;
+
             margin-bottom: 45px;
         }
 
+
         .titulo h2 {
+
             font-size: 35px;
+
             margin-bottom: 10px;
         }
 
+
         .titulo p {
-            color: #aaa;
-        }
 
+            color: #aaaaaa;
 
-        /* =========================
-           CULTOS
-        ========================== */
-
-        .cultos {
-            display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .culto {
-    background: #111;
-    border-radius: 18px;
-    overflow: hidden;
-    border: 1px solid #252525;
-    transition: 0.3s;
-}
-
-.culto:hover {
-    transform: translateY(-6px);
-    border-color: #555;
-}
-
-.culto-imagem {
-    width: 100%;
-    background: #050505;
-    overflow: hidden;
-    line-height: 0;
-}
-
-.culto-imagem img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-}
-
-        .culto-imagem {
-    widt.culto-imagem {
-    width: 100%;
-    background: #050505;
-    overflow: hidden;
-    line-height: 0;
-}
-
-.culto-imagem img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-}
-
-        .culto-conteudo {
-            padding: 22px;
-        }
-
-        .culto-conteudo h3 {
-            font-size: 23px;
-            margin-bottom: 12px;
-        }
-
-        .culto-conteudo p {
-            color: #bbb;
             line-height: 1.6;
         }
 
+
+        /* =====================================
+           CARDS DOS CULTOS
+        ===================================== */
+
+        .cultos {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(280px, 1fr)
+                );
+
+            gap: 25px;
+        }
+
+
+        .culto {
+
+            background: #111111;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            border: 1px solid #252525;
+
+            transition: 0.3s;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .culto:hover {
+
+            transform: translateY(-6px);
+
+            border-color: #555555;
+        }
+
+
+        /* =====================================
+           IMAGEM DOS CARDS
+
+           A imagem determina a altura.
+           Nada é cortado.
+        ===================================== */
+
+        .culto-imagem {
+
+            width: 100%;
+
+            background: #050505;
+
+            overflow: hidden;
+
+            line-height: 0;
+        }
+
+
+        .culto-imagem img {
+
+            width: 100%;
+
+            height: auto;
+
+            display: block;
+
+            object-fit: contain;
+
+            object-position: center;
+        }
+
+
+        /* =====================================
+           CONTEÚDO DO CARD
+        ===================================== */
+
+        .culto-conteudo {
+
+            padding: 22px;
+        }
+
+
+        .culto-conteudo h3 {
+
+            font-size: 23px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .culto-conteudo p {
+
+            color: #bbbbbb;
+
+            line-height: 1.6;
+        }
+
+
         .horario {
+
             display: inline-block;
 
             margin-top: 15px;
 
             padding: 8px 13px;
 
-            background: #222;
+            background: #222222;
 
             border-radius: 20px;
 
@@ -266,15 +366,17 @@
         }
 
 
-        /* =========================
+        /* =====================================
            PEDIDOS DE ORAÇÃO
-        ========================== */
+        ===================================== */
 
         .oracao {
+
             max-width: 700px;
+
             margin: auto;
 
-            background: #111;
+            background: #111111;
 
             padding: 30px;
 
@@ -283,49 +385,69 @@
             border: 1px solid #252525;
 
             box-shadow:
-                0 15px 50px rgba(0, 0, 0, 0.35);
+                0 15px 50px
+                rgba(0, 0, 0, 0.35);
         }
 
+
         .campo {
+
             margin-bottom: 22px;
         }
 
+
         .campo label {
+
             display: block;
+
             margin-bottom: 8px;
+
             font-weight: bold;
         }
 
+
         .campo input,
         .campo textarea {
+
             width: 100%;
 
             padding: 15px;
 
             border-radius: 12px;
 
-            border: 1px solid #333;
+            border: 1px solid #333333;
 
             background: #080808;
 
-            color: #fff;
+            color: #ffffff;
 
             font-size: 16px;
 
             outline: none;
         }
 
+
         .campo input:focus,
         .campo textarea:focus {
-            border-color: #777;
+
+            border-color: #777777;
         }
 
+
         .campo textarea {
+
             min-height: 160px;
+
             resize: vertical;
         }
 
+
+        /* =====================================
+           BOTÃO ENVIAR
+        ===================================== */
+
         .enviar {
+
             width: 100%;
 
             padding: 16px;
@@ -334,9 +456,9 @@
 
             border-radius: 12px;
 
-            background: #fff;
+            background: #ffffff;
 
-            color: #000;
+            color: #000000;
 
             font-size: 16px;
 
@@ -347,169 +469,229 @@
             transition: 0.3s;
         }
 
+
         .enviar:hover {
+
             transform: translateY(-2px);
         }
 
 
-        /* =========================
+        /* =====================================
            RODAPÉ
-        ========================== */
+        ===================================== */
 
         footer {
+
             text-align: center;
 
             padding: 40px 20px;
 
             background: #050505;
 
-            color: #888;
+            color: #888888;
         }
+
 
         footer strong {
-            color: #fff;
+
+            color: #ffffff;
         }
 
 
-        /* =========================
+        /* =====================================
            CELULAR
-        ========================== */
+        ===================================== */
 
         @media (max-width: 600px) {
 
             header {
+
                 min-height: 90vh;
+
+                padding:
+                    35px 15px;
             }
 
+
             .logo {
+
                 max-height: 250px;
             }
 
+
             section {
-                padding: 55px 15px;
+
+                padding:
+                    55px 15px;
             }
 
+
             .titulo h2 {
+
                 font-size: 29px;
             }
 
-            .culto-imagem {
-                height: 250px;
-            }
 
             .oracao {
+
                 padding: 22px;
             }
 
+
             .logo-flutuante {
+
                 width: 65px;
+
                 height: 65px;
 
                 top: 14px;
+
                 right: 14px;
             }
+
+
+            .cultos {
+
+                grid-template-columns: 1fr;
+
+                gap: 20px;
+            }
+
+
+            .culto-imagem img {
+
+                width: 100%;
+
+                height: auto;
+            }
+
         }
+
     </style>
+
 </head>
 
 
 <body>
 
 
-    <!-- =========================
+    <!-- =====================================
          LOGO FLUTUANTE
-    ========================== -->
+    ====================================== -->
 
     <a
         href="#"
         class="logo-flutuante"
         id="logoFlutuante"
-        title="Igreja Cristo é o Noivo"
+        title="Voltar ao topo"
     >
 
         <img
-            src="20260914_123700567.png"
-            alt="Logo Igreja Cristo é o Noivo"
+            src="images/logo.png"
+            alt="Logo Igreja Cristo o Noivo"
         >
 
     </a>
 
 
-    <!-- =========================
+
+    <!-- =====================================
          PRIMEIRA TELA
-    ========================== -->
+    ====================================== -->
 
     <header>
 
         <img
-            src="20260914_123700567.png"
+            src="images/logo.png"
             alt="Logo Igreja Cristo o Noivo"
             class="logo"
             id="logoPrincipal"
         >
 
-        <h1>Igreja Cristo é o Noivo</h1>
+
+        <h1>
+            Igreja Cristo é o Noivo
+        </h1>
+
 
         <p>
             Um lugar de fé, comunhão, oração e transformação.
         </p>
 
-        <a href="#cultos" class="btn">
+
+        <a
+            href="#cultos"
+            class="btn"
+        >
             Ver cultos
         </a>
 
     </header>
 
 
-    <!-- =========================
+
+    <!-- =====================================
          CULTOS
-    ========================== -->
+    ====================================== -->
 
     <section id="cultos">
 
+
         <div class="titulo">
 
-            <h2>Nossos Cultos</h2>
+            <h2>
+                Nossos Cultos
+            </h2>
 
             <p>
-                Venha viver momentos de fé, comunhão e presença de Deus.
+                Venha viver momentos de fé,
+                comunhão e presença de Deus.
             </p>
 
         </div>
 
 
+
         <div class="cultos">
 
+
+            <!-- CARD 1 -->
 
             <div class="culto">
 
                 <div class="culto-imagem">
 
                     <img
-                        src="IMG-20260914-WA0004.jpg"
-                        alt="Culto Círculo de Oração"
+                        src="images/culto1.jpg"
+                        alt="Culto da Igreja"
                     >
 
                 </div>
 
+
                 <div class="culto-conteudo">
 
-                    <h3>Terça-feira</h3>
+                    <h3>
+                        Culto de Celebração
+                    </h3>
 
                     <p>
-                        Um momento especial para adorar a Deus,
-                        ouvir Sua Palavra e fortalecer nossa fé.
+                        Um momento especial para
+                        adorar a Deus, ouvir Sua Palavra
+                        e fortalecer nossa fé.
                     </p>
 
                     <span class="horario">
-                        HORÁRIO:
-                        19 (MS)
+                        Confira os horários
                     </span>
 
                 </div>
 
             </div>
 
+
+
+            <!-- CARD 2 -->
 
             <div class="culto">
 
@@ -522,13 +704,17 @@
 
                 </div>
 
+
                 <div class="culto-conteudo">
 
-                    <h3>Momento de Oração</h3>
+                    <h3>
+                        Momento de Oração
+                    </h3>
 
                     <p>
-                        Um tempo separado para buscar a presença
-                        de Deus e apresentar nossas vidas em oração.
+                        Um tempo separado para buscar
+                        a presença de Deus e apresentar
+                        nossas vidas em oração.
                     </p>
 
                     <span class="horario">
@@ -539,6 +725,9 @@
 
             </div>
 
+
+
+            <!-- CARD 3 -->
 
             <div class="culto">
 
@@ -551,13 +740,17 @@
 
                 </div>
 
+
                 <div class="culto-conteudo">
 
-                    <h3>Palavra de Deus</h3>
+                    <h3>
+                        Palavra de Deus
+                    </h3>
 
                     <p>
-                        Aprendendo cada dia mais através da Palavra
-                        e crescendo na presença de Deus.
+                        Aprendendo cada dia mais através
+                        da Palavra e crescendo na
+                        presença de Deus.
                     </p>
 
                     <span class="horario">
@@ -568,6 +761,9 @@
 
             </div>
 
+
+
+            <!-- CARD 4 -->
 
             <div class="culto">
 
@@ -580,13 +776,17 @@
 
                 </div>
 
+
                 <div class="culto-conteudo">
 
-                    <h3>Comunhão</h3>
+                    <h3>
+                        Comunhão
+                    </h3>
 
                     <p>
-                        Uma igreja reunida para viver a fé,
-                        compartilhar amor e caminhar juntos.
+                        Uma igreja reunida para viver
+                        a fé, compartilhar amor
+                        e caminhar juntos.
                     </p>
 
                     <span class="horario">
@@ -603,15 +803,19 @@
     </section>
 
 
-    <!-- =========================
+
+    <!-- =====================================
          PEDIDOS DE ORAÇÃO
-    ========================== -->
+    ====================================== -->
 
     <section id="oracao">
 
+
         <div class="titulo">
 
-            <h2>Pedidos de Oração</h2>
+            <h2>
+                Pedidos de Oração
+            </h2>
 
             <p>
                 Compartilhe seu pedido.
@@ -621,9 +825,12 @@
         </div>
 
 
+
         <div class="oracao">
 
+
             <form id="formOracao">
+
 
                 <div class="campo">
 
@@ -641,6 +848,7 @@
                 </div>
 
 
+
                 <div class="campo">
 
                     <label for="pedido">
@@ -656,12 +864,14 @@
                 </div>
 
 
+
                 <button
                     type="submit"
                     class="enviar"
                 >
                     🙏 Enviar pedido de oração
                 </button>
+
 
             </form>
 
@@ -670,14 +880,17 @@
     </section>
 
 
-    <!-- =========================
+
+    <!-- =====================================
          RODAPÉ
-    ========================== -->
+    ====================================== -->
 
     <footer>
 
         <p>
-            <strong>Igreja Cristo é o Noivo</strong>
+            <strong>
+                Igreja Cristo é o Noivo
+            </strong>
         </p>
 
         <p>
@@ -687,90 +900,132 @@
     </footer>
 
 
-    <!-- =========================
+
+    <!-- =====================================
          JAVASCRIPT
-    ========================== -->
+    ====================================== -->
 
     <script>
 
-        /* =========================
+
+        /* =====================================
            LOGO FLUTUANTE
-        ========================== */
+        ====================================== */
 
         const logoPrincipal =
-            document.getElementById("logoPrincipal");
+            document.getElementById(
+                "logoPrincipal"
+            );
+
 
         const logoFlutuante =
-            document.getElementById("logoFlutuante");
+            document.getElementById(
+                "logoFlutuante"
+            );
 
 
-        window.addEventListener("scroll", function() {
+        window.addEventListener(
+            "scroll",
+            function() {
 
-            const posicaoLogo =
-                logoPrincipal.getBoundingClientRect();
+
+                const posicaoLogo =
+                    logoPrincipal
+                    .getBoundingClientRect();
 
 
-            /*
-             * A logo flutuante aparece
-             * somente quando a primeira
-             * logo já saiu da tela.
-             */
+                /*
+                 * A logo pequena só aparece
+                 * quando a logo principal
+                 * sair completamente da tela.
+                 */
 
-            if (posicaoLogo.bottom < 0) {
+                if (
+                    posicaoLogo.bottom < 0
+                ) {
 
-                logoFlutuante.classList.add("visivel");
+                    logoFlutuante
+                        .classList
+                        .add("visivel");
 
-            } else {
+                } else {
 
-                logoFlutuante.classList.remove("visivel");
+                    logoFlutuante
+                        .classList
+                        .remove("visivel");
+
+                }
 
             }
-
-        });
-
-
-        /* =========================
-           VOLTAR AO TOPO
-        ========================== */
-
-        logoFlutuante.addEventListener("click", function(event) {
-
-            event.preventDefault();
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-
-        });
+        );
 
 
-        /* =========================
-           WHATSAPP
-        ========================== */
+
+        /* =====================================
+           CLICAR NA LOGO = VOLTAR AO TOPO
+        ====================================== */
+
+        logoFlutuante.addEventListener(
+            "click",
+            function(event) {
+
+                event.preventDefault();
+
+
+                window.scrollTo({
+
+                    top: 0,
+
+                    behavior: "smooth"
+
+                });
+
+            }
+        );
+
+
+
+        /* =====================================
+           PEDIDO DE ORAÇÃO → WHATSAPP
+        ====================================== */
 
         const formulario =
-            document.getElementById("formOracao");
+            document.getElementById(
+                "formOracao"
+            );
 
 
-        formulario.addEventListener("submit", function(event) {
+        formulario.addEventListener(
+            "submit",
+            function(event) {
 
-            event.preventDefault();
-
-
-            const nome =
-                document.getElementById("nome").value.trim();
+                event.preventDefault();
 
 
-            const pedido =
-                document.getElementById("pedido").value.trim();
+                const nome =
+                    document
+                    .getElementById("nome")
+                    .value
+                    .trim();
 
 
-            const numeroWhatsApp =
-                "556796814137";
+                const pedido =
+                    document
+                    .getElementById("pedido")
+                    .value
+                    .trim();
 
 
-            const mensagem =
+                /*
+                 * WhatsApp da igreja
+                 */
+
+                const numeroWhatsApp =
+                    "556796814137";
+
+
+                const mensagem =
+
 `🙏 *NOVO PEDIDO DE ORAÇÃO*
 
 👤 *Nome:*
@@ -782,19 +1037,28 @@ ${pedido}
 Que Deus abençoe e fortaleça esta vida. 🙏`;
 
 
-            const link =
-                "https://wa.me/" +
-                numeroWhatsApp +
-                "?text=" +
-                encodeURIComponent(mensagem);
+                const link =
+
+                    "https://wa.me/" +
+
+                    numeroWhatsApp +
+
+                    "?text=" +
+
+                    encodeURIComponent(
+                        mensagem
+                    );
 
 
-            window.location.href = link;
+                window.location.href = link;
 
-        });
+            }
+        );
+
 
     </script>
 
 
 </body>
-            </html>
+
+    </html>
