@@ -209,24 +209,30 @@
         }
 
         .culto-imagem {
-            width: 100%;
-            height: 280px;
+    width: 100%;
+    height: 300px;
+    background: #050505;
 
-            background: #050505;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    padding: 12px;
 
-            padding: 10px;
-        }
+    overflow: hidden;
+}
 
-        .culto-imagem img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 10px;
-        }
+.culto-imagem img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    object-position: center;
+
+    border-radius: 10px;
+
+    display: block;
+}
 
         .culto-conteudo {
             padding: 22px;
@@ -493,7 +499,8 @@
                     </p>
 
                     <span class="horario">
-                        19 HR (Ms)
+                        HORÁRIO:
+                        19 (MS)
                     </span>
 
                 </div>
