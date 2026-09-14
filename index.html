@@ -24,13 +24,15 @@
         }
 
         /* =========================
-           LOGO FIXA
+           LOGO FLUTUANTE
+           ESCONDIDA AO ENTRAR
         ========================== */
 
         .logo-flutuante {
             position: fixed;
             top: 20px;
             right: 20px;
+
             width: 82px;
             height: 82px;
             padding: 8px;
@@ -51,14 +53,27 @@
 
             backdrop-filter: blur(10px);
 
-            transition: 0.3s ease;
+            /* Começa escondida */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px) scale(0.8);
+
+            transition:
+                opacity 0.45s ease,
+                transform 0.45s ease,
+                visibility 0.45s ease;
+        }
+
+        /* Quando aparecer */
+
+        .logo-flutuante.visivel {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
         }
 
         .logo-flutuante:hover {
             transform: scale(1.08);
-            box-shadow:
-                0 10px 35px rgba(0, 0, 0, 0.8),
-                0 0 30px rgba(255, 255, 255, 0.15);
         }
 
         .logo-flutuante img {
@@ -175,22 +190,16 @@
 
         .cultos {
             display: grid;
-
             grid-template-columns:
                 repeat(auto-fit, minmax(280px, 1fr));
-
             gap: 25px;
         }
 
         .culto {
             background: #111;
-
             border-radius: 18px;
-
             overflow: hidden;
-
             border: 1px solid #252525;
-
             transition: 0.3s;
         }
 
@@ -215,9 +224,7 @@
         .culto-imagem img {
             width: 100%;
             height: 100%;
-
             object-fit: contain;
-
             border-radius: 10px;
         }
 
@@ -256,7 +263,6 @@
 
         .oracao {
             max-width: 700px;
-
             margin: auto;
 
             background: #111;
@@ -277,9 +283,7 @@
 
         .campo label {
             display: block;
-
             margin-bottom: 8px;
-
             font-weight: bold;
         }
 
@@ -309,7 +313,6 @@
 
         .campo textarea {
             min-height: 160px;
-
             resize: vertical;
         }
 
@@ -405,19 +408,26 @@
 
 
     <!-- =========================
-         LOGO FIXA
+         LOGO FLUTUANTE
     ========================== -->
 
-    <a href="#" class="logo-flutuante" title="Igreja Cristo o Noivo">
+    <a
+        href="#"
+        class="logo-flutuante"
+        id="logoFlutuante"
+        title="Igreja Cristo é o Noivo"
+    >
+
         <img
-            src="images/logo.png"
+            src="20260914_123700567.png"
             alt="Logo Igreja Cristo é o Noivo"
         >
+
     </a>
 
 
     <!-- =========================
-         CABEÇALHO
+         PRIMEIRA TELA
     ========================== -->
 
     <header>
@@ -426,9 +436,10 @@
             src="20260914_123700567.png"
             alt="Logo Igreja Cristo o Noivo"
             class="logo"
+            id="logoPrincipal"
         >
 
-        <h1>Igreja Cristo o Noivo</h1>
+        <h1>Igreja Cristo é o Noivo</h1>
 
         <p>
             Um lugar de fé, comunhão, oração e transformação.
@@ -461,8 +472,6 @@
         <div class="cultos">
 
 
-            <!-- CULTO 1 -->
-
             <div class="culto">
 
                 <div class="culto-imagem">
@@ -491,8 +500,6 @@
 
             </div>
 
-
-            <!-- CULTO 2 -->
 
             <div class="culto">
 
@@ -523,8 +530,6 @@
             </div>
 
 
-            <!-- CULTO 3 -->
-
             <div class="culto">
 
                 <div class="culto-imagem">
@@ -553,8 +558,6 @@
 
             </div>
 
-
-            <!-- CULTO 4 -->
 
             <div class="culto">
 
@@ -591,7 +594,7 @@
 
 
     <!-- =========================
-         PEDIDO DE ORAÇÃO
+         PEDIDOS DE ORAÇÃO
     ========================== -->
 
     <section id="oracao">
@@ -611,7 +614,6 @@
         <div class="oracao">
 
             <form id="formOracao">
-
 
                 <div class="campo">
 
@@ -651,7 +653,6 @@
                     🙏 Enviar pedido de oração
                 </button>
 
-
             </form>
 
         </div>
@@ -677,10 +678,66 @@
 
 
     <!-- =========================
-         WHATSAPP
+         JAVASCRIPT
     ========================== -->
 
     <script>
+
+        /* =========================
+           LOGO FLUTUANTE
+        ========================== */
+
+        const logoPrincipal =
+            document.getElementById("logoPrincipal");
+
+        const logoFlutuante =
+            document.getElementById("logoFlutuante");
+
+
+        window.addEventListener("scroll", function() {
+
+            const posicaoLogo =
+                logoPrincipal.getBoundingClientRect();
+
+
+            /*
+             * A logo flutuante aparece
+             * somente quando a primeira
+             * logo já saiu da tela.
+             */
+
+            if (posicaoLogo.bottom < 0) {
+
+                logoFlutuante.classList.add("visivel");
+
+            } else {
+
+                logoFlutuante.classList.remove("visivel");
+
+            }
+
+        });
+
+
+        /* =========================
+           VOLTAR AO TOPO
+        ========================== */
+
+        logoFlutuante.addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        });
+
+
+        /* =========================
+           WHATSAPP
+        ========================== */
 
         const formulario =
             document.getElementById("formOracao");
@@ -730,4 +787,4 @@ Que Deus abençoe e fortaleça esta vida. 🙏`;
 
 
 </body>
-    </html>
+            </html>
