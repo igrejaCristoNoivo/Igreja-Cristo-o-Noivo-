@@ -1,941 +1,1164 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">
 
-<head>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <meta charset="UTF-8">
+<title>Igreja Cristo é o Noivo</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<style>
 
-    <title>Igreja Cristo é o Noivo</title>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-    <style>
+    html {
+        scroll-behavior: smooth;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #080808;
+        color: #ffffff;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    /* =====================================
+       LOGO FLUTUANTE
+    ===================================== */
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #080808;
-            color: #ffffff;
-        }
+    .logo-flutuante {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 82px;
+        height: 82px;
+        padding: 8px;
+        background: rgba(15, 15, 15, 0.94);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        box-shadow:
+            0 8px 30px rgba(0, 0, 0, 0.65),
+            0 0 25px rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px) scale(0.8);
+        transition:
+            opacity 0.45s ease,
+            transform 0.45s ease,
+            visibility 0.45s ease;
+    }
 
-        /* =====================================
-           LOGO FLUTUANTE
-        ===================================== */
+    .logo-flutuante.visivel {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0) scale(1);
+    }
 
-        .logo-flutuante {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 82px;
-            height: 82px;
-            padding: 8px;
-            background: rgba(15, 15, 15, 0.94);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            box-shadow:
-                0 8px 30px rgba(0, 0, 0, 0.65),
-                0 0 25px rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
+    .logo-flutuante:hover {
+        transform: scale(1.08);
+    }
+
+    .logo-flutuante img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 50%;
+    }
+
+    /* =====================================
+       NOTIFICAÇÃO DA ARRECADAÇÃO
+    ===================================== */
+
+    .notificacao-arrecadacao {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        width: 310px;
+        max-width: calc(100% - 40px);
+        padding: 9px;
+        background:
+            linear-gradient(
+                145deg,
+                #171717,
+                #080808
+            );
+        border: 2px solid #d4af37;
+        border-radius: 20px;
+        box-shadow:
+            0 15px 45px rgba(0, 0, 0, 0.75),
+            0 0 25px rgba(212, 175, 55, 0.18);
+        z-index: 9998;
+        animation: aparecerArrecadacao 0.5s ease;
+    }
+
+    .notificacao-arrecadacao img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 13px;
+    }
+
+    /* =====================================
+       ÁREA DO PIX
+    ===================================== */
+
+    .pix-destaque {
+        margin-top: 10px;
+        padding: 17px 13px 14px;
+        text-align: center;
+        border-radius: 15px;
+        background:
+            linear-gradient(
+                145deg,
+                #201b08,
+                #0d0d0d
+            );
+        border: 1px solid rgba(212, 175, 55, 0.75);
+        box-shadow:
+            inset 0 0 20px rgba(212, 175, 55, 0.06),
+            0 0 18px rgba(212, 175, 55, 0.08);
+    }
+
+    .pix-titulo {
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 1.2px;
+        color: #d4af37;
+        margin-bottom: 5px;
+    }
+
+    .pix-subtitulo {
+        font-size: 12px;
+        color: #bdbdbd;
+        margin-bottom: 10px;
+    }
+
+    .pix-chave {
+        display: block;
+        width: 100%;
+        padding: 11px 8px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        background: #050505;
+        border: 1px solid #4d401b;
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        word-break: break-all;
+        text-align: center;
+        user-select: all;
+    }
+
+    .botao-copiar-pix {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 11px;
+        background:
+            linear-gradient(
+                135deg,
+                #f2d46b,
+                #d4af37
+            );
+        color: #080808;
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 0.4px;
+        cursor: pointer;
+        box-shadow:
+            0 5px 18px rgba(212, 175, 55, 0.22);
+        transition: 0.25s ease;
+    }
+
+    .botao-copiar-pix:hover {
+        transform: translateY(-2px);
+        box-shadow:
+            0 8px 24px rgba(212, 175, 55, 0.35);
+    }
+
+    .botao-copiar-pix:active {
+        transform: scale(0.97);
+    }
+
+    .pix-sucesso {
+        display: none;
+        margin-top: 8px;
+        color: #8cffad;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    /* =====================================
+       BOTÃO FECHAR
+    ===================================== */
+
+    .fechar-notificacao {
+        position: absolute;
+        top: -14px;
+        right: -14px;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        border: 2px solid #080808;
+        border-radius: 50%;
+        background: #d4af37;
+        color: #000000;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 32px;
+        text-align: center;
+        cursor: pointer;
+        z-index: 10000;
+        transition: 0.3s;
+    }
+
+    .fechar-notificacao:hover {
+        background: #ffffff;
+        transform: scale(1.08);
+    }
+
+    /* =====================================
+       ÍCONE PARA ABRIR NOVAMENTE
+    ===================================== */
+
+    .botao-arrecadacao {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        width: 57px;
+        height: 57px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #d4af37;
+        border-radius: 50%;
+        background: #111111;
+        color: #ffffff;
+        font-size: 26px;
+        cursor: pointer;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
+        z-index: 9997;
+        transition: 0.3s;
+    }
+
+    .botao-arrecadacao:hover {
+        transform: scale(1.08);
+        background: #d4af37;
+    }
+
+    @keyframes aparecerArrecadacao {
+
+        from {
             opacity: 0;
-            visibility: hidden;
-            transform: translateY(-20px) scale(0.8);
-            transition:
-                opacity 0.45s ease,
-                transform 0.45s ease,
-                visibility 0.45s ease;
+            transform: translateY(25px) scale(0.95);
         }
 
-        .logo-flutuante.visivel {
+        to {
             opacity: 1;
-            visibility: visible;
             transform: translateY(0) scale(1);
         }
 
-        .logo-flutuante:hover {
-            transform: scale(1.08);
-        }
+    }
 
-        .logo-flutuante img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 50%;
-        }
+    /* =====================================
+       PRIMEIRA TELA
+    ===================================== */
 
-        /* =====================================
-           NOTIFICAÇÃO DA ARRECADAÇÃO
-        ===================================== */
+    header {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 40px 20px;
+        background:
+            linear-gradient(
+                rgba(0, 0, 0, 0.78),
+                rgba(0, 0, 0, 0.94)
+            ),
+            #111111;
+    }
 
-        .notificacao-arrecadacao {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            width: 290px;
-            max-width: calc(100% - 40px);
-            padding: 8px;
-            background: #111111;
-            border: 1px solid #d4af37;
-            border-radius: 16px;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
-            z-index: 9998;
-            animation: aparecerArrecadacao 0.5s ease;
-        }
+    .logo {
+        width: min(85%, 380px);
+        max-height: 320px;
+        object-fit: contain;
+        margin-bottom: 30px;
+    }
 
-        .notificacao-arrecadacao img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 10px;
-        }
+    header h1 {
+        font-size: clamp(30px, 7vw, 58px);
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+    }
 
-        .fechar-notificacao {
-            position: absolute;
-            top: -14px;
-            right: -14px;
-            width: 34px;
-            height: 34px;
-            padding: 0;
-            border: 2px solid #080808;
-            border-radius: 50%;
-            background: #d4af37;
-            color: #000000;
-            font-size: 18px;
-            font-weight: bold;
-            line-height: 30px;
-            text-align: center;
-            cursor: pointer;
-            z-index: 10000;
-            transition: 0.3s;
-        }
+    header p {
+        color: #cccccc;
+        font-size: 17px;
+        max-width: 600px;
+        line-height: 1.6;
+    }
 
-        .fechar-notificacao:hover {
-            background: #ffffff;
-            transform: scale(1.08);
-        }
+    /* =====================================
+       BOTÃO PRINCIPAL
+    ===================================== */
 
-        /* =====================================
-           ÍCONE PARA ABRIR NOVAMENTE
-        ===================================== */
+    .btn {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 15px 30px;
+        border-radius: 50px;
+        background: #ffffff;
+        color: #000000;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
 
-        .botao-arrecadacao {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            width: 57px;
-            height: 57px;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #d4af37;
-            border-radius: 50%;
-            background: #111111;
-            color: #ffffff;
-            font-size: 26px;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
-            z-index: 9997;
-            transition: 0.3s;
-        }
+    .btn:hover {
+        transform: scale(1.05);
+    }
 
-        .botao-arrecadacao:hover {
-            transform: scale(1.08);
-            background: #d4af37;
-        }
+    /* =====================================
+       SEÇÕES
+    ===================================== */
 
-        @keyframes aparecerArrecadacao {
-            from {
-                opacity: 0;
-                transform: translateY(25px) scale(0.95);
-            }
+    section {
+        padding: 75px 20px;
+        max-width: 1200px;
+        margin: auto;
+    }
 
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
+    .titulo {
+        text-align: center;
+        margin-bottom: 45px;
+    }
 
-        /* =====================================
-           PRIMEIRA TELA
-        ===================================== */
+    .titulo h2 {
+        font-size: 35px;
+        margin-bottom: 10px;
+    }
+
+    .titulo p {
+        color: #aaaaaa;
+        line-height: 1.6;
+    }
+
+    /* =====================================
+       CARDS DOS CULTOS
+    ===================================== */
+
+    .cultos {
+        display: grid;
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(280px, 1fr)
+        );
+        gap: 25px;
+    }
+
+    .culto {
+        background: #111111;
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid #252525;
+        transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .culto:hover {
+        transform: translateY(-6px);
+        border-color: #555555;
+    }
+
+    .culto-imagem {
+        width: 100%;
+        background: #050505;
+        overflow: hidden;
+        line-height: 0;
+    }
+
+    .culto-imagem img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    /* =====================================
+       CONTEÚDO DOS CARDS
+    ===================================== */
+
+    .culto-conteudo {
+        padding: 22px;
+    }
+
+    .culto-conteudo h3 {
+        font-size: 23px;
+        margin-bottom: 12px;
+    }
+
+    .culto-conteudo p {
+        color: #bbbbbb;
+        line-height: 1.6;
+    }
+
+    .horario {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 8px 13px;
+        background: #222222;
+        border-radius: 20px;
+        font-size: 14px;
+    }
+
+    /* =====================================
+       PEDIDOS DE ORAÇÃO
+    ===================================== */
+
+    .oracao {
+        max-width: 700px;
+        margin: auto;
+        background: #111111;
+        padding: 30px;
+        border-radius: 20px;
+        border: 1px solid #252525;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    .campo {
+        margin-bottom: 22px;
+    }
+
+    .campo label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    .campo input,
+    .campo textarea {
+        width: 100%;
+        padding: 15px;
+        border-radius: 12px;
+        border: 1px solid #333333;
+        background: #080808;
+        color: #ffffff;
+        font-size: 16px;
+        outline: none;
+    }
+
+    .campo input:focus,
+    .campo textarea:focus {
+        border-color: #777777;
+    }
+
+    .campo textarea {
+        min-height: 160px;
+        resize: vertical;
+    }
+
+    /* =====================================
+       BOTÃO ENVIAR
+    ===================================== */
+
+    .enviar {
+        width: 100%;
+        padding: 16px;
+        border: none;
+        border-radius: 12px;
+        background: #ffffff;
+        color: #000000;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .enviar:hover {
+        transform: translateY(-2px);
+    }
+
+    /* =====================================
+       RODAPÉ
+    ===================================== */
+
+    footer {
+        text-align: center;
+        padding: 40px 20px;
+        background: #050505;
+        color: #888888;
+    }
+
+    footer strong {
+        color: #ffffff;
+    }
+
+    /* =====================================
+       CELULAR
+    ===================================== */
+
+    @media (max-width: 600px) {
 
         header {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 40px 20px;
-            background:
-                linear-gradient(
-                    rgba(0, 0, 0, 0.78),
-                    rgba(0, 0, 0, 0.94)
-                ),
-                #111111;
+            min-height: 90vh;
+            padding: 35px 15px;
         }
 
         .logo {
-            width: min(85%, 380px);
-            max-height: 320px;
-            object-fit: contain;
-            margin-bottom: 30px;
+            max-height: 250px;
         }
-
-        header h1 {
-            font-size: clamp(30px, 7vw, 58px);
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-        }
-
-        header p {
-            color: #cccccc;
-            font-size: 17px;
-            max-width: 600px;
-            line-height: 1.6;
-        }
-
-        /* =====================================
-           BOTÃO PRINCIPAL
-        ===================================== */
-
-        .btn {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 15px 30px;
-            border-radius: 50px;
-            background: #ffffff;
-            color: #000000;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-        }
-
-        /* =====================================
-           SEÇÕES
-        ===================================== */
 
         section {
-            padding: 75px 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .titulo {
-            text-align: center;
-            margin-bottom: 45px;
+            padding: 55px 15px;
         }
 
         .titulo h2 {
-            font-size: 35px;
-            margin-bottom: 10px;
+            font-size: 29px;
         }
 
-        .titulo p {
-            color: #aaaaaa;
-            line-height: 1.6;
+        .oracao {
+            padding: 22px;
         }
 
-        /* =====================================
-           CARDS DOS CULTOS
-        ===================================== */
+        .logo-flutuante {
+            width: 65px;
+            height: 65px;
+            top: 14px;
+            right: 14px;
+        }
 
         .cultos {
-            display: grid;
-            grid-template-columns: repeat(
-                auto-fit,
-                minmax(280px, 1fr)
-            );
-            gap: 25px;
-        }
-
-        .culto {
-            background: #111111;
-            border-radius: 18px;
-            overflow: hidden;
-            border: 1px solid #252525;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .culto:hover {
-            transform: translateY(-6px);
-            border-color: #555555;
-        }
-
-        .culto-imagem {
-            width: 100%;
-            background: #050505;
-            overflow: hidden;
-            line-height: 0;
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
 
         .culto-imagem img {
             width: 100%;
             height: auto;
-            display: block;
-            object-fit: contain;
-            object-position: center;
         }
 
-        /* =====================================
-           CONTEÚDO DOS CARDS
-        ===================================== */
-
-        .culto-conteudo {
-            padding: 22px;
+        .notificacao-arrecadacao {
+            right: 15px;
+            bottom: 15px;
+            width: 270px;
+            max-width: calc(100% - 30px);
         }
 
-        .culto-conteudo h3 {
-            font-size: 23px;
-            margin-bottom: 12px;
+        .botao-arrecadacao {
+            right: 15px;
+            bottom: 15px;
         }
 
-        .culto-conteudo p {
-            color: #bbbbbb;
-            line-height: 1.6;
-        }
-
-        .horario {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 8px 13px;
-            background: #222222;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-
-        /* =====================================
-           PEDIDOS DE ORAÇÃO
-        ===================================== */
-
-        .oracao {
-            max-width: 700px;
-            margin: auto;
-            background: #111111;
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid #252525;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
-        }
-
-        .campo {
-            margin-bottom: 22px;
-        }
-
-        .campo label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        .campo input,
-        .campo textarea {
-            width: 100%;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid #333333;
-            background: #080808;
-            color: #ffffff;
+        .pix-chave {
             font-size: 16px;
-            outline: none;
         }
 
-        .campo input:focus,
-        .campo textarea:focus {
-            border-color: #777777;
-        }
+    }
 
-        .campo textarea {
-            min-height: 160px;
-            resize: vertical;
-        }
+</style>
 
-        /* =====================================
-           BOTÃO ENVIAR
-        ===================================== */
+</head><body><!-- =====================================
+     LOGO FLUTUANTE
+====================================== -->
 
-        .enviar {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 12px;
-            background: #ffffff;
-            color: #000000;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+<a
+    href="#"
+    class="logo-flutuante"
+    id="logoFlutuante"
+    title="Voltar ao topo"
+>
 
-        .enviar:hover {
-            transform: translateY(-2px);
-        }
-
-        /* =====================================
-           RODAPÉ
-        ===================================== */
-
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            background: #050505;
-            color: #888888;
-        }
-
-        footer strong {
-            color: #ffffff;
-        }
-
-        /* =====================================
-           CELULAR
-        ===================================== */
-
-        @media (max-width: 600px) {
-
-            header {
-                min-height: 90vh;
-                padding: 35px 15px;
-            }
-
-            .logo {
-                max-height: 250px;
-            }
-
-            section {
-                padding: 55px 15px;
-            }
-
-            .titulo h2 {
-                font-size: 29px;
-            }
-
-            .oracao {
-                padding: 22px;
-            }
-
-            .logo-flutuante {
-                width: 65px;
-                height: 65px;
-                top: 14px;
-                right: 14px;
-            }
-
-            .cultos {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .culto-imagem img {
-                width: 100%;
-                height: auto;
-            }
-
-            .notificacao-arrecadacao {
-                right: 15px;
-                bottom: 15px;
-                width: 245px;
-                max-width: calc(100% - 30px);
-            }
-
-            .botao-arrecadacao {
-                right: 15px;
-                bottom: 15px;
-            }
-
-        }
-
-    </style>
-
-</head>
-
-<body>
-
-    <!-- =====================================
-         LOGO FLUTUANTE
-    ====================================== -->
-
-    <a
-        href="#"
-        class="logo-flutuante"
-        id="logoFlutuante"
-        title="Voltar ao topo"
+    <img
+        src="20260914_123700567.png"
+        alt="Logo Igreja Cristo o Noivo"
     >
 
-        <img
-            src="20260914_123700567.png"
-            alt="Logo Igreja Cristo o Noivo"
-        >
-
-    </a>
+</a>
 
 
-    <!-- =====================================
-         NOTIFICAÇÃO DA ARRECADAÇÃO
-         
-         Coloque a imagem na mesma pasta
-         com o nome: arrecadacao.jpg
-    ====================================== -->
+<!-- =====================================
+     NOTIFICAÇÃO DA ARRECADAÇÃO
+====================================== -->
 
-    <div
-        class="notificacao-arrecadacao"
-        id="notificacaoArrecadacao"
-    >
-
-        <button
-            type="button"
-            class="fechar-notificacao"
-            id="fecharNotificacao"
-            aria-label="Fechar notificação"
-            title="Fechar notificação"
-        >
-            X
-        </button>
-
-        <img
-            src="IMG-20260915-WA0009(1).jpg"
-            alt="Imagem da arrecadação da igreja"
-        >
-
-    </div>
-
-
-    <!-- =====================================
-         ÍCONE PARA ABRIR A ARRECADAÇÃO
-    ====================================== -->
+<div
+    class="notificacao-arrecadacao"
+    id="notificacaoArrecadacao"
+>
 
     <button
         type="button"
-        class="botao-arrecadacao"
-        id="abrirArrecadacao"
-        aria-label="Ver arrecadação novamente"
-        title="Ver arrecadação novamente"
+        class="fechar-notificacao"
+        id="fecharNotificacao"
+        aria-label="Fechar notificação"
+        title="Fechar notificação"
     >
-        🎁
+        X
     </button>
 
+    <img
+        src="IMG-20260915-WA0009(1).jpg"
+        alt="Imagem da arrecadação da igreja"
+    >
 
     <!-- =====================================
-         PRIMEIRA TELA
+         PIX EM DESTAQUE
     ====================================== -->
 
-    <header>
+    <div class="pix-destaque">
 
-        <img
-            src="20260914_123700567.png"
-            alt="Logo Igreja Cristo o Noivo"
-            class="logo"
-            id="logoPrincipal"
+        <div class="pix-titulo">
+             DIA DAS CRIANÇAS
+        </div>
+
+        <div class="pix-subtitulo">
+            Sua contribuição faz a diferença nesse
+            DIA DAS CRIANÇAS!!
+        </div>
+
+        <span
+            class="pix-chave"
+            id="chavePix"
         >
+            67998072152
+        </span>
 
-        <h1>
-            Igreja Cristo é o Noivo
-        </h1>
+        <button
+            type="button"
+            class="botao-copiar-pix"
+            id="copiarPix"
+        >
+            📋 COPIAR CHAVE PIX
+        </button>
+
+        <div
+            class="pix-sucesso"
+            id="pixSucesso"
+        >
+            ✓ Chave Pix copiada!
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================
+     ÍCONE PARA ABRIR A ARRECADAÇÃO
+====================================== -->
+
+<button
+    type="button"
+    class="botao-arrecadacao"
+    id="abrirArrecadacao"
+    aria-label="Ver arrecadação novamente"
+    title="Ver arrecadação novamente"
+>
+    🎁
+</button>
+
+
+<!-- =====================================
+     PRIMEIRA TELA
+====================================== -->
+
+<header>
+
+    <img
+        src="20260914_123700567.png"
+        alt="Logo Igreja Cristo o Noivo"
+        class="logo"
+        id="logoPrincipal"
+    >
+
+    <h1>
+        Igreja Cristo é o Noivo
+    </h1>
+
+    <p>
+        Um lugar de fé, comunhão, oração e transformação.
+    </p>
+
+    <a
+        href="#cultos"
+        class="btn"
+    >
+        Ver cultos
+    </a>
+
+</header>
+
+
+<!-- =====================================
+     CULTOS
+====================================== -->
+
+<section id="cultos">
+
+    <div class="titulo">
+
+        <h2>
+            Nossos Cultos
+        </h2>
 
         <p>
-            Um lugar de fé, comunhão, oração e transformação.
+            Venha viver momentos de fé,
+            comunhão e presença de Deus.
         </p>
 
-        <a
-            href="#cultos"
-            class="btn"
-        >
-            Ver cultos
-        </a>
+    </div>
 
-    </header>
+    <div class="cultos">
 
+        <!-- CARD 1 -->
 
-    <!-- =====================================
-         CULTOS
-    ====================================== -->
+        <div class="culto">
 
-    <section id="cultos">
+            <div class="culto-imagem">
 
-        <div class="titulo">
-
-            <h2>
-                Nossos Cultos
-            </h2>
-
-            <p>
-                Venha viver momentos de fé,
-                comunhão e presença de Deus.
-            </p>
-
-        </div>
-
-        <div class="cultos">
-
-            <!-- CARD 1 -->
-
-            <div class="culto">
-
-                <div class="culto-imagem">
-
-                    <img
-                        src="IMG-20260914-WA0004.jpg"
-                        alt="Culto Círculo de Oração"
-                    >
-
-                </div>
-
-                <div class="culto-conteudo">
-
-                    <h3>
-                        Culto Círculo de Oração
-                    </h3>
-
-                    <p>
-                        TERÇA-FEIRA
-                    </p>
-
-                    <span class="horario">
-                        HORÁRIO: 19 (MS)
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <!-- CARD 2 -->
-
-            <div class="culto">
-
-                <div class="culto-imagem">
-
-                    <img
-                        src="Polish_20260914_150307085.jpg"
-                        alt="Culto de Libertação"
-                    >
-
-                </div>
-
-                <div class="culto-conteudo">
-
-                    <h3>
-                        Culto de Libertação
-                    </h3>
-
-                    <p>
-                        SEXTA-FEIRA
-                    </p>
-
-                    <span class="horario">
-                        HORÁRIO: 19 (MS)
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <!-- CARD 3 -->
-
-            <div class="culto">
-
-                <div class="culto-imagem">
-
-                    <img
-                        src="Polish_20260914_150307085.jpg"
-                        alt="Culto da Família"
-                    >
-
-                </div>
-
-                <div class="culto-conteudo">
-
-                    <h3>
-                        Culto da Família
-                    </h3>
-
-                    <p>
-                        DOMINGO
-                    </p>
-
-                    <span class="horario">
-                        HORÁRIO: 19 (MS)
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <!-- CARD 4 -->
-
-            <div class="culto">
-
-                <div class="culto-imagem">
-
-                    <img
-                        src="Polish_20260914_151557933.jpg"
-                        alt="Comunhão da Igreja"
-                    >
-
-                </div>
-
-                <div class="culto-conteudo">
-
-                    <h3>
-                        Comunhão
-                    </h3>
-
-                    <p>
-                        Uma igreja reunida para viver
-                        a fé, compartilhar amor
-                        e caminhar juntos.
-                    </p>
-
-                    <span class="horario">
-                        Esperamos por você
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================
-         PEDIDOS DE ORAÇÃO
-    ====================================== -->
-
-    <section id="oracao">
-
-        <div class="titulo">
-
-            <h2>
-                Pedidos de Oração
-            </h2>
-
-            <p>
-                Compartilhe seu pedido.
-                Estamos juntos em oração por você.
-            </p>
-
-        </div>
-
-        <div class="oracao">
-
-            <form id="formOracao">
-
-                <div class="campo">
-
-                    <label for="nome">
-                        Nome
-                    </label>
-
-                    <input
-                        type="text"
-                        id="nome"
-                        placeholder="Digite seu nome"
-                        required
-                    >
-
-                </div>
-
-                <div class="campo">
-
-                    <label for="pedido">
-                        Pedido de oração
-                    </label>
-
-                    <textarea
-                        id="pedido"
-                        placeholder="Escreva seu pedido de oração..."
-                        required
-                    ></textarea>
-
-                </div>
-
-                <button
-                    type="submit"
-                    class="enviar"
+                <img
+                    src="IMG-20260914-WA0004.jpg"
+                    alt="Culto Círculo de Oração"
                 >
-                    🙏 Enviar pedido de oração
-                </button>
 
-            </form>
+            </div>
+
+            <div class="culto-conteudo">
+
+                <h3>
+                    Culto Círculo de Oração
+                </h3>
+
+                <p>
+                    TERÇA-FEIRA
+                </p>
+
+                <span class="horario">
+                    HORÁRIO: 19 (MS)
+                </span>
+
+            </div>
 
         </div>
 
-    </section>
+
+        <!-- CARD 2 -->
+
+        <div class="culto">
+
+            <div class="culto-imagem">
+
+                <img
+                    src="Polish_20260914_150307085.jpg"
+                    alt="Culto de Libertação"
+                >
+
+            </div>
+
+            <div class="culto-conteudo">
+
+                <h3>
+                    Culto de Libertação
+                </h3>
+
+                <p>
+                    SEXTA-FEIRA
+                </p>
+
+                <span class="horario">
+                    HORÁRIO: 19 (MS)
+                </span>
+
+            </div>
+
+        </div>
 
 
-    <!-- =====================================
-         RODAPÉ
-    ====================================== -->
+        <!-- CARD 3 -->
 
-    <footer>
+        <div class="culto">
+
+            <div class="culto-imagem">
+
+                <img
+                    src="Polish_20260914_150307085.jpg"
+                    alt="Culto da Família"
+                >
+
+            </div>
+
+            <div class="culto-conteudo">
+
+                <h3>
+                    Culto da Família
+                </h3>
+
+                <p>
+                    DOMINGO
+                </p>
+
+                <span class="horario">
+                    HORÁRIO: 19 (MS)
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARD 4 -->
+
+        <div class="culto">
+
+            <div class="culto-imagem">
+
+                <img
+                    src="Polish_20260914_151557933.jpg"
+                    alt="Comunhão da Igreja"
+                >
+
+            </div>
+
+            <div class="culto-conteudo">
+
+                <h3>
+                    Comunhão
+                </h3>
+
+                <p>
+                    Uma igreja reunida para viver
+                    a fé, compartilhar amor
+                    e caminhar juntos.
+                </p>
+
+                <span class="horario">
+                    Esperamos por você
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     PEDIDOS DE ORAÇÃO
+====================================== -->
+
+<section id="oracao">
+
+    <div class="titulo">
+
+        <h2>
+            Pedidos de Oração
+        </h2>
 
         <p>
-            <strong>
-                Igreja Cristo é o Noivo
-            </strong>
+            Compartilhe seu pedido.
+            Estamos juntos em oração por você.
         </p>
 
-        <p>
-            © 2026 - Todos os direitos reservados.
-        </p>
+    </div>
 
-    </footer>
+    <div class="oracao">
+
+        <form id="formOracao">
+
+            <div class="campo">
+
+                <label for="nome">
+                    Nome
+                </label>
+
+                <input
+                    type="text"
+                    id="nome"
+                    placeholder="Digite seu nome"
+                    required
+                >
+
+            </div>
+
+            <div class="campo">
+
+                <label for="pedido">
+                    Pedido de oração
+                </label>
+
+                <textarea
+                    id="pedido"
+                    placeholder="Escreva seu pedido de oração..."
+                    required
+                ></textarea>
+
+            </div>
+
+            <button
+                type="submit"
+                class="enviar"
+            >
+                🙏 Enviar pedido de oração
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
 
 
-    <!-- =====================================
-         JAVASCRIPT
-    ====================================== -->
+<!-- =====================================
+     RODAPÉ
+====================================== -->
 
-    <script>
+<footer>
 
-        /* =====================================
-           LOGO FLUTUANTE
-        ===================================== */
+    <p>
+        <strong>
+            Igreja Cristo é o Noivo
+        </strong>
+    </p>
 
-        const logoPrincipal =
-            document.getElementById("logoPrincipal");
+    <p>
+        © 2026 - Todos os direitos reservados.
+    </p>
 
-        const logoFlutuante =
-            document.getElementById("logoFlutuante");
+</footer>
 
-        window.addEventListener("scroll", function () {
 
-            const posicaoLogo =
-                logoPrincipal.getBoundingClientRect();
+<!-- =====================================
+     JAVASCRIPT
+====================================== -->
 
-            if (posicaoLogo.bottom < 0) {
+<script>
 
-                logoFlutuante.classList.add("visivel");
+    /* =====================================
+       LOGO FLUTUANTE
+    ===================================== */
 
-            } else {
+    const logoPrincipal =
+        document.getElementById("logoPrincipal");
 
-                logoFlutuante.classList.remove("visivel");
+    const logoFlutuante =
+        document.getElementById("logoFlutuante");
+
+    window.addEventListener("scroll", function () {
+
+        const posicaoLogo =
+            logoPrincipal.getBoundingClientRect();
+
+        if (posicaoLogo.bottom < 0) {
+
+            logoFlutuante.classList.add("visivel");
+
+        } else {
+
+            logoFlutuante.classList.remove("visivel");
+
+        }
+
+    });
+
+
+    /* =====================================
+       CLICAR NA LOGO = VOLTAR AO TOPO
+    ===================================== */
+
+    logoFlutuante.addEventListener("click", function (event) {
+
+        event.preventDefault();
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+
+    /* =====================================
+       NOTIFICAÇÃO DA ARRECADAÇÃO
+    ===================================== */
+
+    const notificacaoArrecadacao =
+        document.getElementById("notificacaoArrecadacao");
+
+    const fecharNotificacao =
+        document.getElementById("fecharNotificacao");
+
+    const abrirArrecadacao =
+        document.getElementById("abrirArrecadacao");
+
+
+    /* =====================================
+       FECHAR NOTIFICAÇÃO
+    ===================================== */
+
+    fecharNotificacao.onclick = function () {
+
+        notificacaoArrecadacao.style.display = "none";
+
+        abrirArrecadacao.style.display = "flex";
+
+    };
+
+
+    /* =====================================
+       ABRIR NOVAMENTE
+    ===================================== */
+
+    abrirArrecadacao.onclick = function () {
+
+        notificacaoArrecadacao.style.display = "block";
+
+        abrirArrecadacao.style.display = "none";
+
+    };
+
+
+    /* =====================================
+       COPIAR CHAVE PIX
+    ===================================== */
+
+    const copiarPix =
+        document.getElementById("copiarPix");
+
+    const chavePix =
+        document.getElementById("chavePix");
+
+    const pixSucesso =
+        document.getElementById("pixSucesso");
+
+
+    copiarPix.onclick = async function () {
+
+        const chave = "67998072152";
+
+        try {
+
+            await navigator.clipboard.writeText(chave);
+
+            copiarPix.innerHTML =
+                "✓ CHAVE COPIADA!";
+
+            pixSucesso.style.display = "block";
+
+            setTimeout(function () {
+
+                copiarPix.innerHTML =
+                    "📋 COPIAR CHAVE PIX";
+
+                pixSucesso.style.display =
+                    "none";
+
+            }, 2500);
+
+        } catch (erro) {
+
+            const areaTexto =
+                document.createElement("textarea");
+
+            areaTexto.value = chave;
+
+            areaTexto.style.position = "fixed";
+            areaTexto.style.opacity = "0";
+
+            document.body.appendChild(areaTexto);
+
+            areaTexto.focus();
+            areaTexto.select();
+
+            try {
+
+                document.execCommand("copy");
+
+                copiarPix.innerHTML =
+                    "✓ CHAVE COPIADA!";
+
+                pixSucesso.style.display =
+                    "block";
+
+            } catch (erroFallback) {
+
+                copiarPix.innerHTML =
+                    "Selecione a chave acima";
 
             }
 
-        });
+            document.body.removeChild(areaTexto);
+
+            setTimeout(function () {
+
+                copiarPix.innerHTML =
+                    "📋 COPIAR CHAVE PIX";
+
+                pixSucesso.style.display =
+                    "none";
+
+            }, 2500);
+
+        }
+
+    };
 
 
-        /* =====================================
-           CLICAR NA LOGO = VOLTAR AO TOPO
-        ===================================== */
+    /* =====================================
+       PEDIDO DE ORAÇÃO → WHATSAPP
+    ===================================== */
 
-        logoFlutuante.addEventListener("click", function (event) {
+    const formulario =
+        document.getElementById("formOracao");
 
-            event.preventDefault();
+    formulario.addEventListener("submit", function (event) {
 
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+        event.preventDefault();
 
-        });
+        const nome =
+            document.getElementById("nome").value.trim();
 
+        const pedido =
+            document.getElementById("pedido").value.trim();
 
-        /* =====================================
-           NOTIFICAÇÃO DA ARRECADAÇÃO
-        ===================================== */
+        const numeroWhatsApp =
+            "556796814137";
 
-        const notificacaoArrecadacao =
-            document.getElementById("notificacaoArrecadacao");
+        const mensagem =
 
-        const fecharNotificacao =
-            document.getElementById("fecharNotificacao");
+`🙏 NOVO PEDIDO DE ORAÇÃO
 
-        const abrirArrecadacao =
-            document.getElementById("abrirArrecadacao");
-
-
-        // Fechar a notificação
-
-        fecharNotificacao.onclick = function () {
-
-            notificacaoArrecadacao.style.display = "none";
-
-            abrirArrecadacao.style.display = "flex";
-
-        };
-
-
-        // Abrir a notificação novamente
-
-        abrirArrecadacao.onclick = function () {
-
-            notificacaoArrecadacao.style.display = "block";
-
-            abrirArrecadacao.style.display = "none";
-
-        };
-
-
-        /* =====================================
-           PEDIDO DE ORAÇÃO → WHATSAPP
-        ===================================== */
-
-        const formulario =
-            document.getElementById("formOracao");
-
-        formulario.addEventListener("submit", function (event) {
-
-            event.preventDefault();
-
-            const nome =
-                document.getElementById("nome").value.trim();
-
-            const pedido =
-                document.getElementById("pedido").value.trim();
-
-            const numeroWhatsApp =
-                "556796814137";
-
-            const mensagem =
-
-`🙏 *NOVO PEDIDO DE ORAÇÃO*
-
-👤 *Nome:*
+👤 Nome:
 ${nome}
 
-🕊️ *Pedido de oração:*
+🕊️ Pedido de oração:
 ${pedido}
 
 Que Deus abençoe e fortaleça esta vida. 🙏`;
 
-            const link =
-                "https://wa.me/" +
-                numeroWhatsApp +
-                "?text=" +
-                encodeURIComponent(mensagem);
+        const link =
+            "https://wa.me/" +
+            numeroWhatsApp +
+            "?text=" +
+            encodeURIComponent(mensagem);
 
-            window.location.href = link;
+        window.location.href = link;
 
-        });
+    });
 
-    </script>
+</script>
 
-</body>
-
-</html>
+</body></html>
