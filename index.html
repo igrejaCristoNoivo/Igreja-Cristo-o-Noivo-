@@ -90,7 +90,7 @@
             max-width: calc(100% - 40px);
             padding: 8px;
             background: #111111;
-            border: 1px solid rgba(212, 175, 55, 0.75);
+            border: 1px solid #d4af37;
             border-radius: 16px;
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
             z-index: 9998;
@@ -106,19 +106,21 @@
 
         .fechar-notificacao {
             position: absolute;
-            top: -12px;
-            right: -12px;
-            width: 31px;
-            height: 31px;
-            border: 2px solid #111111;
+            top: -14px;
+            right: -14px;
+            width: 34px;
+            height: 34px;
+            padding: 0;
+            border: 2px solid #080808;
             border-radius: 50%;
             background: #d4af37;
-            color: #111111;
-            font-size: 24px;
+            color: #000000;
+            font-size: 18px;
             font-weight: bold;
-            line-height: 25px;
+            line-height: 30px;
+            text-align: center;
             cursor: pointer;
-            z-index: 2;
+            z-index: 10000;
             transition: 0.3s;
         }
 
@@ -127,7 +129,9 @@
             transform: scale(1.08);
         }
 
-        /* ÍCONE PARA REABRIR A ARRECADAÇÃO */
+        /* =====================================
+           ÍCONE PARA ABRIR NOVAMENTE
+        ===================================== */
 
         .botao-arrecadacao {
             position: fixed;
@@ -458,6 +462,7 @@
                 right: 15px;
                 bottom: 15px;
             }
+
         }
 
     </style>
@@ -498,16 +503,17 @@
     >
 
         <button
+            type="button"
             class="fechar-notificacao"
             id="fecharNotificacao"
             aria-label="Fechar notificação"
-            title="Fechar"
+            title="Fechar notificação"
         >
-            &times;
+            X
         </button>
 
         <img
-            src="IMG-20260915-WA0009(1).jpg"
+            src="arrecadacao.jpg"
             alt="Imagem da arrecadação da igreja"
         >
 
@@ -519,12 +525,13 @@
     ====================================== -->
 
     <button
+        type="button"
         class="botao-arrecadacao"
         id="abrirArrecadacao"
-        aria-label="Ver imagem da arrecadação novamente"
+        aria-label="Ver arrecadação novamente"
         title="Ver arrecadação novamente"
     >
-       ❗❗ ARRECADAÇÃO ❗❗
+        🎁
     </button>
 
 
@@ -863,19 +870,72 @@
             document.getElementById("abrirArrecadacao");
 
 
-        // Fechar a imagem da arrecadação
+        // Fechar a notificação
 
-        fecharNotificacao.addEventListener("click", function () {
+        fecharNotificacao.onclick = function () {
 
             notificacaoArrecadacao.style.display = "none";
 
             abrirArrecadacao.style.display = "flex";
 
+        };
+
+
+        // Abrir a notificação novamente
+
+        abrirArrecadacao.onclick = function () {
+
+            notificacaoArrecadacao.style.display = "block";
+
+            abrirArrecadacao.style.display = "none";
+
+        };
+
+
+        /* =====================================
+           PEDIDO DE ORAÇÃO → WHATSAPP
+        ===================================== */
+
+        const formulario =
+            document.getElementById("formOracao");
+
+        formulario.addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+            const nome =
+                document.getElementById("nome").value.trim();
+
+            const pedido =
+                document.getElementById("pedido").value.trim();
+
+            const numeroWhatsApp =
+                "556796814137";
+
+            const mensagem =
+
+`🙏 *NOVO PEDIDO DE ORAÇÃO*
+
+👤 *Nome:*
+${nome}
+
+🕊️ *Pedido de oração:*
+${pedido}
+
+Que Deus abençoe e fortaleça esta vida. 🙏`;
+
+            const link =
+                "https://wa.me/" +
+                numeroWhatsApp +
+                "?text=" +
+                encodeURIComponent(mensagem);
+
+            window.location.href = link;
+
         });
 
+    </script>
 
-        // Abrir a imagem novamente
+</body>
 
-        abrirArrecadacao.addEventListener("click", function () {
-
-      
+</html>
